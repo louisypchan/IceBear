@@ -1,0 +1,9 @@
+apply plugin: "slice"
+
+slice {
+    output = file('src/main/java')
+}
+
+dependencies {
+    implementation "com.zeroc:ice:${iceVersion}"
+}

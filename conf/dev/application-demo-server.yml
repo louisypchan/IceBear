@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    include: logging
+
+icebox:
+  name: IceBear.server-demo
+  print-services-ready: demo server is ready
+  services:
+    - entry: com.zd.demo.impl.DemoService
+      endpoints: tcp -p 20003

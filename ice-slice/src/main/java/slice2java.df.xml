@@ -1,0 +1,13 @@
+<state>
+  <timestamp value='1602324085524' />
+  <sourceSet name='default'>
+    <source name='/Users/louischan/Documents/git/IceBear/ice-slice/src/main/slice/demo/demo.ice'>
+      <file name='/Users/louischan/Documents/git/IceBear/ice-slice/src/main/java/com/zd/service/Demo/_Marker.java' />
+      <file name='/Users/louischan/Documents/git/IceBear/ice-slice/src/main/java/com/zd/service/Demo/Hello.java' />
+      <file name='/Users/louischan/Documents/git/IceBear/ice-slice/src/main/java/com/zd/service/Demo/HelloPrx.java' />
+      <file name='/Users/louischan/Documents/git/IceBear/ice-slice/src/main/java/com/zd/service/Demo/_HelloPrxI.java' />
+    </source>
+    <arg value='/usr/local/bin/slice2java' />
+    <arg value='-I/usr/local/share/ice/slice' />
+  </sourceSet>
+</state>

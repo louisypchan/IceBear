@@ -1,11 +1,7 @@
-package com.zd.ice.server.anno;
+package com.zd;
 
-import com.zd.ice.server.config.DelegatingServerConfiguration;
-import com.zd.ice.server.props.IceBoxProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Import;
-
-import java.lang.annotation.*;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /****************************************************************************
  Copyright (c) 2019 Louis Y P Chen.
@@ -25,10 +21,9 @@ import java.lang.annotation.*;
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
-@Target({ElementType.TYPE})
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@EnableConfigurationProperties(IceBoxProperties.class)
-@Import(DelegatingServerConfiguration.class)
-public @interface EnableIceApplication {
+@SpringBootApplication
+public class DemoApplication {
+    public static void main(String ...args) {
+        SpringApplication.run(DemoApplication.class, args);
+    }
 }

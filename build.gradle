@@ -38,13 +38,11 @@ subprojects {
     }
 
     dependencies {
-        compile "org.springframework.boot:spring-boot-starter"
-        compile "org.springframework.boot:spring-boot-starter-log4j2"
-        compile "com.fasterxml.jackson.core:jackson-databind"
-        compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml"
-        implementation "com.zeroc:ice:${iceVersion}"
-        implementation "com.zeroc:icebox:${iceVersion}"
+        implementation "org.springframework.boot:spring-boot-starter"
+        implementation "org.springframework.boot:spring-boot-starter-log4j2"
+        implementation "com.fasterxml.jackson.core:jackson-databind"
+        implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml"
         implementation "org.apache.commons:commons-lang3:3.11"
-        testCompile group: 'junit', name: 'junit', version: '4.12'
+        testImplementation group: 'junit', name: 'junit', version: '4.12'
     }
 }

@@ -1,11 +1,9 @@
-package com.zd.ice.server.anno;
+package com.zd.demo.impl;
 
-import com.zd.ice.server.config.DelegatingServerConfiguration;
-import com.zd.ice.server.props.IceBoxProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Import;
-
-import java.lang.annotation.*;
+import com.zd.ice.server.impl.DefaultService;
+import com.zd.service.Demo.Hello;
+import com.zeroc.Ice.Current;
+import org.springframework.stereotype.Service;
 
 /****************************************************************************
  Copyright (c) 2019 Louis Y P Chen.
@@ -25,10 +23,11 @@ import java.lang.annotation.*;
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
-@Target({ElementType.TYPE})
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@EnableConfigurationProperties(IceBoxProperties.class)
-@Import(DelegatingServerConfiguration.class)
-public @interface EnableIceApplication {
+@Service
+public class DemoService extends DefaultService implements Hello{
+
+    @Override
+    public String sayHello(Current current) {
+        return "Hello World!";
+    }
 }

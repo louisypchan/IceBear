@@ -1,5 +1,7 @@
 package com.zd.ice.server.config;
 
+import org.springframework.context.annotation.Configuration;
+
 /****************************************************************************
  Copyright (c) 2019 Louis Y P Chen.
  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -18,5 +20,6 @@ package com.zd.ice.server.config;
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
-public class DelegatingServerConfiguration {
+@Configuration
+public class DelegatingServerConfiguration extends IceApplicationConfigurationSupport{
 }
