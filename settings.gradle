@@ -1,0 +1,3 @@
+rootProject.name = 'IceBear'
+include 'server'
+
