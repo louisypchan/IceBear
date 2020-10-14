@@ -1,0 +1,7 @@
+ice:
+  client:
+    type: glacier2
+    glacier2:
+      router: "LOUISGlacier2/router:tcp -h 192.168.50.88 -p 4063"
+      app-id: "louis"
+      secret: "louis"

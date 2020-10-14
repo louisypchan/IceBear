@@ -1,0 +1,5 @@
+dependencies {
+    compile "com.zeroc:ice:${iceVersion}"
+    compile group: 'com.zeroc', name: 'glacier2', version: "${iceVersion}"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

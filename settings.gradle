@@ -2,4 +2,7 @@ rootProject.name = 'IceBear'
 include 'server'
 include 'demo-server'
 include 'ice-slice'
+include 'client'
+include 'glacier2'
+include 'demo-client'
 

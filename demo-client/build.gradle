@@ -1,0 +1,6 @@
+dependencies {
+    implementation project(":client")
+    implementation project(":ice-slice")
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux'
+    compile group: 'io.netty', name: 'netty-transport-native-epoll', classifier: 'linux-x86_64'
+}
