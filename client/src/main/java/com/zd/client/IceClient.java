@@ -2,7 +2,6 @@ package com.zd.client;
 
 import com.zd.client.props.IceClientProperties;
 import com.zd.client.util.Ice;
-import com.zd.client.util.ServicePrx;
 import com.zeroc.Glacier2.CannotCreateSessionException;
 import com.zeroc.Glacier2.PermissionDeniedException;
 import com.zeroc.Glacier2.SessionNotExistException;
@@ -126,8 +125,6 @@ public class IceClient {
             }
             connection.setCloseCallback(con -> {
                session = false;
-               // reopen the session
-                createSession();
             });
         } catch (CannotCreateSessionException e) {
             session = false;
@@ -138,16 +135,20 @@ public class IceClient {
         }
     }
 
-    private ServicePrx lookUpService(Class<?> ...classes) {
-        List<ObjectPrx> proxyList = null;
+    private List<ObjectPrx> lookUpService(Class<?> ...classes) {
+        List<ObjectPrx> proxyList = new ArrayList<>();
         switch (iceClientProperties.getType()) {
             case Ice.GLACIER2:
                 proxyList = lookUpServiceByGlacier2(classes);
                 break;
             case Ice.REGISTRY:
+                // TODO:
+                break;
+            case Ice.ENDPOINTS:
+                proxyList = lookUpServiceByEndpoints(classes);
                 break;
         }
-        return  new ServicePrx(proxyList);
+        return  proxyList;
     }
 
 
@@ -161,11 +162,19 @@ public class IceClient {
         if (session) {
             Arrays.stream(classes).forEach(it -> {
                 ObjectPrx proxy = getProxy(it, this.communicator.stringToProxy(it.getName()));
-                if (proxy != null) {
-                    proxyList.add(proxy);
-                }
+                proxyList.add(proxy);
             });
         }
+        return proxyList;
+    }
+
+    private List<ObjectPrx> lookUpServiceByEndpoints(Class<?> ...classes) {
+        List<ObjectPrx> proxyList = new ArrayList<>();
+        Arrays.stream(classes).forEach(it -> {
+            ObjectPrx proxy = getProxy(it,
+                    communicator.stringToProxy(String.format("%s:%s", it.getName(), iceClientProperties.getEndpoints().get(it.getSimpleName()))));
+            proxyList.add(proxy);
+        });
         return proxyList;
     }
 
@@ -180,9 +189,18 @@ public class IceClient {
         return proxy;
     }
 
+
     public ObjectPrx call(Class<?> clz) {
-        ServicePrx servicePrx = lookUpService(clz);
-        return servicePrx.getProxies().size() > 0 ? servicePrx.getProxies().get(0) : null;
+        List<ObjectPrx> objectPrxList = lookUpService(clz);
+        return objectPrxList.size() > 0 ? objectPrxList.get(0) : null;
+    }
+
+    public List<ObjectPrx> call(Class<?> ...classes) {
+        return lookUpService(classes);
+    }
+
+    public CompletableFuture<List<ObjectPrx>> callAsync(Class<?> ...classes) {
+        return CompletableFuture.supplyAsync(() -> call(classes));
     }
 
     public CompletableFuture<ObjectPrx> callAsync(Class<?> clz) {

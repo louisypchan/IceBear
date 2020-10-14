@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import reactor.core.publisher.Mono;
 
 /****************************************************************************
  Copyright (c) 2019 Louis Y P Chen.
@@ -38,6 +39,18 @@ public class IceClientTest {
     public void testIceClient() {
         HelloPrx helloPrx = (HelloPrx) iceClient.call(HelloPrx.class);
         System.out.println(helloPrx.sayHello());
+    }
+
+    @Test
+    public void testIceClientCallAsync() {
+        Mono.fromFuture(iceClient.callAsync(HelloPrx.class))
+                .switchIfEmpty(Mono.error(new Exception("empty")))
+                .cast(HelloPrx.class)
+                .flatMap(helloPrx -> {
+                    System.out.println(helloPrx.sayHello());
+                    return Mono.empty();
+                })
+                .block();
     }
 
 }
