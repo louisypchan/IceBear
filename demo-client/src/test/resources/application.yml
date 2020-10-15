@@ -1,6 +1,8 @@
 ice:
   client:
-    type: glacier2
+    type: endpoints #glacier2
+    endpoints:
+      HelloPrx: tcp -p 20003
     glacier2:
       router: "LOUISGlacier2/router:tcp -h 192.168.50.88 -p 4063"
       app-id: "louis"
