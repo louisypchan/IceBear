@@ -1,11 +1,5 @@
 package com.zd.client.anno;
 
-import com.zd.client.config.IceClientConfiguration;
-import com.zd.client.processor.IceAnnotationBeanPostProcessor;
-import com.zd.client.props.IceClientProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Import;
-
 import java.lang.annotation.*;
 
 /****************************************************************************
@@ -26,10 +20,8 @@ import java.lang.annotation.*;
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
  ****************************************************************************/
-@Target(ElementType.TYPE)
+@Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@EnableConfigurationProperties(IceClientProperties.class)
-@Import({IceClientConfiguration.class, IceAnnotationBeanPostProcessor.class})
-public @interface EnableIceClient {
+public @interface Ice {
 }

@@ -1,6 +1,7 @@
 package com.zd.demo.test;
 
 import com.zd.client.IceClient;
+import com.zd.client.anno.Ice;
 import com.zd.demo.DemoClientApplication;
 import com.zd.service.Demo.HelloPrx;
 import org.junit.Test;
@@ -35,9 +36,18 @@ public class IceClientTest {
     @Autowired
     private IceClient iceClient;
 
+    @Ice
+    private HelloPrx helloPrx;
+
     @Test
     public void testIceClient() {
         HelloPrx helloPrx = (HelloPrx) iceClient.call(HelloPrx.class);
+        System.out.println(helloPrx.sayHello());
+    }
+
+    @Test
+    public void testIceAnnotation() {
+        assert helloPrx != null;
         System.out.println(helloPrx.sayHello());
     }
 
